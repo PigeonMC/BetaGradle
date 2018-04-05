@@ -1,0 +1,61 @@
+# This is a list of classes that need to be modified
+# "overwrite" means the class is completely replaced by a class in src
+# "inject" means the class needs to be replaced by the Mixin version of the class
+
+overwrite net/minecraft/network/packet/PlayerPositionPacket
+overwrite net/minecraft/network/packet/MapDataPacket
+overwrite net/minecraft/network/packet/UseEntityPacket
+overwrite net/minecraft/network/packet/BedPacket
+overwrite net/minecraft/network/packet/CollectPacket
+overwrite net/minecraft/network/packet/MapChunkPacket
+overwrite net/minecraft/network/packet/UpdateHealthPacket
+overwrite net/minecraft/network/packet/PlayerPositionRotationPacket
+overwrite net/minecraft/network/packet/WeatherPacket
+overwrite net/minecraft/network/packet/DoorUpdatePacket
+overwrite net/minecraft/network/packet/EntityVelocityPacket
+overwrite net/minecraft/network/packet/PlaceBlockPacket
+overwrite net/minecraft/network/packet/UpdateTimePacket
+overwrite net/minecraft/network/packet/BlockItemSwitchPacket
+overwrite net/minecraft/network/packet/SetSlotPacket
+overwrite net/minecraft/network/packet/FlyingPacket
+overwrite net/minecraft/network/packet/OpenWindowPacker
+overwrite net/minecraft/network/packet/EntityStatusPacket
+overwrite net/minecraft/network/packet/EntitySpawnPacket
+overwrite net/minecraft/network/packet/BlockDigPacket
+overwrite net/minecraft/network/packet/SleepPacket
+overwrite net/minecraft/network/packet/WindowItemPacket
+# overwrite net/minecraft/network/packet/Packet
+overwrite net/minecraft/network/packet/KeepAlivePacket
+overwrite net/minecraft/network/packet/NamedEntitySpawnPacket
+overwrite net/minecraft/network/packet/CloseWindowPacket
+overwrite net/minecraft/network/packet/HandshakePacket
+overwrite net/minecraft/network/packet/UpdateProgressBarPacket
+overwrite net/minecraft/network/packet/ItemSpawnPacket
+overwrite net/minecraft/network/packet/AnimationPacket
+overwrite net/minecraft/network/packet/AttachEntityPacket
+overwrite net/minecraft/network/packet/LoginPacket
+overwrite net/minecraft/network/packet/StatisticPacket
+overwrite net/minecraft/network/packet/TransactionPacket
+overwrite net/minecraft/network/packet/RespawnPacket
+overwrite net/minecraft/network/packet/ChatPacket
+overwrite net/minecraft/network/packet/RelativeEntityPositionRotationPacket
+overwrite net/minecraft/network/packet/PositionPacket
+overwrite net/minecraft/network/packet/WindowClickPacket
+overwrite net/minecraft/network/packet/SpawnPositionPacket
+overwrite net/minecraft/network/packet/EntityTeleportPacket
+overwrite net/minecraft/network/packet/ExplosionPacket
+overwrite net/minecraft/network/packet/DestroyEntityPacket
+overwrite net/minecraft/network/packet/EntityRotationPacket
+overwrite net/minecraft/network/packet/PlayerInventoryPacket
+overwrite net/minecraft/network/packet/VehicleSpawnPacket
+overwrite net/minecraft/network/packet/RelativeEntityPositionPacket
+overwrite net/minecraft/network/packet/EntityActionPacket
+overwrite net/minecraft/network/packet/BlockChangePacket
+overwrite net/minecraft/network/packet/EntityPacket
+overwrite net/minecraft/network/packet/UpdateSignPacket
+overwrite net/minecraft/network/packet/EntityMetadataPacket
+overwrite net/minecraft/network/packet/PlayerRotationPacker
+overwrite net/minecraft/network/packet/PaintingEntityPacket
+overwrite net/minecraft/network/packet/PlayNoteBlockPacket
+overwrite net/minecraft/network/packet/MultiBlockChangePacket
+overwrite net/minecraft/network/packet/KickDisconnectPacket

@@ -1,0 +1,12 @@
+# TODO: Organize this
+*.jar
+.gradle/
+.idea/
+.mixin.out/
+build/
+buildSrc/.gradle/
+buildSrc/build/
+logs/
+out/
+.classloader.out/
+
