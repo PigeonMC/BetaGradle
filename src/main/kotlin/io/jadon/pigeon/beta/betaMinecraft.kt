@@ -4,7 +4,12 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
+import java.io.BufferedOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
 
 const val UNFINISHED_JAR_PATH = ""
 const val FINISHED_JAR_PATH = ""
@@ -38,17 +43,46 @@ open class BetaMinecraftTask : DefaultTask() {
 
         lines.forEach {
             val parts = it.split(" ")
+            val clazz = parts[1].replace('.', '/').let { if (it.endsWith(".class")) it else "$it.class" }
             when (parts[0]) {
                 "overwrite" -> {
-                    overwriteClasses.add(parts[1])
+                    overwriteClasses.add(clazz)
                 }
                 "inject" -> {
-                    injectClasses.add(parts[1])
+                    injectClasses.add(clazz)
                 }
             }
         }
 
-        // TODO: Inject classes
+        val unfinishedJar = ZipFile(unfinishedFile)
+        val classes = unfinishedJar.entries().toList().filter { !overwriteClasses.contains(it.name) }.map {
+            val stream = unfinishedJar.getInputStream(it)
+            val bytes = stream.readBytes()
+            stream.close()
+            it.name to bytes
+        }.toMutableList()
+
+        classes.addAll(overwriteClasses.map {
+            val stream = this.javaClass.getResourceAsStream(it)
+            val bytes = stream.readBytes()
+            stream.close()
+            it to bytes
+        })
+
+        // TODO: This won't be needed when the top is removed
+        if (finishedFile.exists()) finishedFile.delete()
+
+        val finishedJarStream = ZipOutputStream(FileOutputStream(finishedFile))
+        val output = BufferedOutputStream(finishedJarStream)
+
+        classes.forEach {
+            finishedJarStream.putNextEntry(ZipEntry(it.first))
+            output.write(it.second)
+            output.flush()
+            finishedJarStream.closeEntry()
+        }
+        output.close()
+        finishedJarStream.close()
 
         project.dependencies.add("compile", project.files(finishedFile))
     }
