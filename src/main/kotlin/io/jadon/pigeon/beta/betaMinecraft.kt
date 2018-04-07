@@ -7,7 +7,6 @@ import org.gradle.api.tasks.TaskAction
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.instrument.Instrumentation
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
@@ -79,7 +78,8 @@ open class BetaMinecraftTask : DefaultTask() {
             } else {
                 val bytes = stream.readBytes()
                 stream.close()
-                it to bytes
+                // remove slash in front
+                it.substring(1) to bytes
             }
         }.toMap())
 
@@ -89,7 +89,6 @@ open class BetaMinecraftTask : DefaultTask() {
         val finishedJarStream = ZipOutputStream(FileOutputStream(finishedFile))
         val output = BufferedOutputStream(finishedJarStream)
 
-        val usedClasses = mutableSetOf<String>()
         classes.forEach { (name, bytes) ->
             finishedJarStream.putNextEntry(ZipEntry(name))
             output.write(bytes)

@@ -4,7 +4,12 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
+import java.io.BufferedOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
 
 open class MapMinecraftPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -16,6 +21,8 @@ open class MapMinecraftPlugin : Plugin<Project> {
 open class MapMinecraftExtension {
     var tsrgFile: String = "null"
     var serverToClientObf: String = "null"
+    var classOverrides: String = "null"
+    var unfinishedJar: String = "build/minecraft/minecraft_unfinished.jar"
     var clientJar: String = "build/minecraft/minecraft_client.jar"
     var serverJar: String = "build/minecraft/minecraft_server.jar"
     var mergedJar: String = "build/minecraft/minecraft_merged.jar"
@@ -145,6 +152,43 @@ open class MapMinecraftTask : DefaultTask() {
 
         println("Mapping Jar (might take a long time)")
         JarManager.remapJar(mergedFile.path, mappedFile.path, tempSrgFile.path)
+
+        if (extension.classOverrides != "null") {
+            val classOverridesFile = File(extension.classOverrides)
+            val unfinishedFile = File(extension.unfinishedJar)
+
+            val overwrites = classOverridesFile.readLines().mapNotNull {
+                if (it.startsWith("overwrite ")) {
+                    val s = it.split("overwrite ")[1].replace('.', '/')
+                    if (s.endsWith(".class")) s else "$s.class"
+                } else {
+                    null
+                }
+            }
+
+            val mappedJarFile = ZipFile(mappedFile)
+            val classes = mappedJarFile.entries().toList().map {
+                val stream = mappedJarFile.getInputStream(it)
+                val bytes = stream.readBytes()
+                stream.close()
+                it.name to bytes
+            }.filter {
+                !overwrites.contains(it.first)
+            }.toMap()
+            mappedJarFile.close()
+
+            if (unfinishedFile.exists()) unfinishedFile.delete()
+            val unfinishedJarStream = ZipOutputStream(FileOutputStream(unfinishedFile))
+            val output = BufferedOutputStream(unfinishedJarStream)
+            classes.forEach { name, bytes ->
+                unfinishedJarStream.putNextEntry(ZipEntry(name))
+                output.write(bytes)
+                output.flush()
+                unfinishedJarStream.closeEntry()
+            }
+            output.close()
+            unfinishedJarStream.close()
+        }
 
         println("Mapping completed")
 

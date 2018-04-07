@@ -40,7 +40,8 @@ compileTestKotlin {
 minecraftData {
     serverToClientObf = "src/main/resources/mappings/serverToClientObf.tsrg"
     tsrgFile = "src/main/resources/mappings/merged.tsrg"
-    mappedJar = "src/main/resources/unfinished.jar"
+    classOverrides = "src/main/resources/classOverrides.txt"
+    unfinishedJar = "src/main/resources/unfinished.jar"
 }
 
 compileJava.dependsOn mapMinecraft
