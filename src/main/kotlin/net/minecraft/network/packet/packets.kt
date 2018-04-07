@@ -16,6 +16,10 @@ import java.io.DataOutputStream
 import java.util.zip.Deflater
 import java.util.zip.Inflater
 
+fun main(args: Array<String>) {
+    
+}
+
 /*
  * These classes are used instead of the Vanilla ones because neither the Server nor the Client
  * has all of the constructors needed, and Mixin doesn't support injecting Constructors.
@@ -917,8 +921,7 @@ open class MultiBlockChangePacket : Packet {
     override fun getPacketSize(): Int = 10 + this.size * 4
 
 }
-
-class NamedEntitySpawnPacket() : Packet() {
+open class NamedEntitySpawnPacket() : Packet() {
     @JvmField
     var entityId: Int = 0
     @JvmField
@@ -976,8 +979,7 @@ class NamedEntitySpawnPacket() : Packet() {
 
     override fun getPacketSize(): Int = 28
 }
-
-class OpenWindowPacker() : Packet() {
+open class OpenWindowPacket() : Packet() {
     @JvmField
     var windowId: Int = 0
     @JvmField
@@ -1014,8 +1016,7 @@ class OpenWindowPacker() : Packet() {
 
     override fun getPacketSize(): Int = 3 + this.windowTitle.length
 }
-
-class PaintingEntityPacket() : Packet() {
+open class PaintingEntityPacket() : Packet() {
     @JvmField
     var entityId: Int = 0
     @JvmField
@@ -1063,8 +1064,7 @@ class PaintingEntityPacket() : Packet() {
     override fun getPacketSize(): Int = 24
 }
 
-
-class PlaceBlockPacket : Packet() {
+open class PlaceBlockPacket : Packet() {
     @JvmField
     var x: Int = 0
     @JvmField
@@ -1114,8 +1114,7 @@ class PlaceBlockPacket : Packet() {
     override fun getPacketSize(): Int = 15
 
 }
-
-class PlayerInventoryPacket() : Packet() {
+open class PlayerInventoryPacket() : Packet() {
     @JvmField
     var entityId: Int = 0
     @JvmField
@@ -1158,8 +1157,7 @@ class PlayerInventoryPacket() : Packet() {
 
     override fun getPacketSize(): Int = 8
 }
-
-class PlayerPositionPacket : FlyingPacket {
+open class PlayerPositionPacket : FlyingPacket {
     constructor() {
         this.moving = true
     }
@@ -1192,8 +1190,7 @@ class PlayerPositionPacket : FlyingPacket {
     override fun getPacketSize(): Int = 33
 
 }
-
-class PlayerPositionRotationPacket : FlyingPacket {
+open class PlayerPositionRotationPacket : FlyingPacket {
     constructor() {
         this.rotating = true
         this.moving = true
@@ -1233,8 +1230,7 @@ class PlayerPositionRotationPacket : FlyingPacket {
 
     override fun getPacketSize(): Int = 41
 }
-
-class PlayerRotationPacket : FlyingPacket {
+open class PlayerRotationPacket : FlyingPacket {
     constructor() {
         this.rotating = true
     }
@@ -1260,8 +1256,7 @@ class PlayerRotationPacket : FlyingPacket {
 
     override fun getPacketSize(): Int = 9
 }
-
-class PlayNoteBlockPacket() : Packet() {
+open class PlayNoteBlockPacket() : Packet() {
     @JvmField
     var x: Int = 0
     @JvmField
@@ -1304,8 +1299,7 @@ class PlayNoteBlockPacket() : Packet() {
     override fun getPacketSize(): Int = 12
 }
 
-
-class PositionPacket() : Packet() {
+open class PositionPacket() : Packet() {
     @JvmField
     var a: Float = 0.toFloat()
     @JvmField
@@ -1367,8 +1361,7 @@ class PositionPacket() : Packet() {
         return this.d
     }
 }
-
-class RelativeEntityPositionPacket : EntityPacket {
+open class RelativeEntityPositionPacket : EntityPacket {
     constructor() {}
 
     constructor(var1: Int, var2: Byte, var3: Byte, var4: Byte) : super(var1) {
@@ -1393,8 +1386,7 @@ class RelativeEntityPositionPacket : EntityPacket {
 
     override fun getPacketSize(): Int = 7
 }
-
-class RelativeEntityPositionRotationPacket : EntityPacket {
+open class RelativeEntityPositionRotationPacket : EntityPacket {
     constructor() {
         this.rotating = true
     }
@@ -1432,8 +1424,7 @@ class RelativeEntityPositionRotationPacket : EntityPacket {
 }
 
 // TODO: RespawnPacket
-
-class SetSlotPacket : Packet {
+open class SetSlotPacket : Packet {
     @JvmField
     var windowId: Int = 0
     @JvmField
@@ -1484,8 +1475,7 @@ class SetSlotPacket : Packet {
 }
 
 // TODO: SleepPacket
-
-class SpawnPositionPacket : Packet {
+open class SpawnPositionPacket : Packet {
     @JvmField
     var x: Int = 0
     @JvmField
@@ -1524,8 +1514,7 @@ class SpawnPositionPacket : Packet {
 // TODO: TransactionPacket
 // TODO: UpdateHealthPacket
 
-
-class UpdateProgressBarPacket : Packet {
+open class UpdateProgressBarPacket : Packet {
     @JvmField
     var windowId: Int = 0
     @JvmField
@@ -1559,8 +1548,7 @@ class UpdateProgressBarPacket : Packet {
 
     override fun getPacketSize(): Int = 5
 }
-
-class UpdateSignPacket : Packet {
+open class UpdateSignPacket : Packet {
     @JvmField
     var x: Int = 0
     @JvmField
@@ -1611,8 +1599,7 @@ class UpdateSignPacket : Packet {
 
     override fun getPacketSize(): Int = this.signLines.map { it.length }.sum()
 }
-
-class UpdateTimePacket : Packet {
+open class UpdateTimePacket : Packet {
     @JvmField
     var time: Long = 0
 
@@ -1637,8 +1624,7 @@ class UpdateTimePacket : Packet {
     override fun getPacketSize(): Int = 8
 }
 
-
-class UseEntityPacket : Packet() {
+open class UseEntityPacket : Packet() {
     @JvmField
     var playerId: Int = 0
     @JvmField
@@ -1664,8 +1650,7 @@ class UseEntityPacket : Packet() {
 
     override fun getPacketSize(): Int = 9
 }
-
-class VehicleSpawnPacket : Packet {
+open class VehicleSpawnPacket : Packet {
     @JvmField
     var entityId: Int = 0
     @JvmField
@@ -1769,8 +1754,7 @@ class VehicleSpawnPacket : Packet {
 
 // TODO: WeatherPacket
 
-
-class WindowClickPacket : Packet() {
+open class WindowClickPacket : Packet() {
     @JvmField
     var windowId: Int = 0
     @JvmField
@@ -1823,8 +1807,7 @@ class WindowClickPacket : Packet() {
 
     override fun getPacketSize(): Int = 11
 }
-
-class WindowItemPacket : Packet {
+open class WindowItemPacket : Packet {
     @JvmField
     var windowId: Int = 0
     @JvmField

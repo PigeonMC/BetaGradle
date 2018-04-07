@@ -7,12 +7,13 @@ import org.gradle.api.tasks.TaskAction
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.instrument.Instrumentation
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
 
-const val UNFINISHED_JAR_PATH = ""
-const val FINISHED_JAR_PATH = ""
+const val UNFINISHED_JAR_PATH = "/unfinished.jar"
+const val FINISHED_JAR_PATH = "build/minecraft/minecraft.jar"
 
 open class BetaMinecraftPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -24,7 +25,12 @@ open class BetaMinecraftTask : DefaultTask() {
 
     @TaskAction
     fun betaMinecraft() {
-        val unfinishedFile = File(UNFINISHED_JAR_PATH)
+        val inputStream = this.javaClass.getResourceAsStream(UNFINISHED_JAR_PATH)
+        val content = inputStream.readBytes()
+        inputStream.close()
+        val unfinishedFile = File.createTempFile("unfinished_minecraft", ".jar")
+        unfinishedFile.writeBytes(content)
+
         val finishedFile = File(FINISHED_JAR_PATH)
 
         // TODO: remove when ready to publish
@@ -33,7 +39,7 @@ open class BetaMinecraftTask : DefaultTask() {
             return
         }
 
-        val lines = this.javaClass.getResource("classOverrides.txt").readText().split("\n").mapNotNull {
+        val lines = this.javaClass.getResource("/classOverrides.txt").readText().split("\n").mapNotNull {
             val s = it.trim()
             if (s.isEmpty() || s.startsWith("#")) null else s
         }
@@ -43,7 +49,7 @@ open class BetaMinecraftTask : DefaultTask() {
 
         lines.forEach {
             val parts = it.split(" ")
-            val clazz = parts[1].replace('.', '/').let { if (it.endsWith(".class")) it else "$it.class" }
+            val clazz = "/" + parts[1].replace('.', '/').let { if (it.endsWith(".class")) it else "$it.class" }
             when (parts[0]) {
                 "overwrite" -> {
                     overwriteClasses.add(clazz)
@@ -55,19 +61,27 @@ open class BetaMinecraftTask : DefaultTask() {
         }
 
         val unfinishedJar = ZipFile(unfinishedFile)
-        val classes = unfinishedJar.entries().toList().filter { !overwriteClasses.contains(it.name) }.map {
+        val classes = unfinishedJar.entries().toList().filter {
+            !overwriteClasses.contains(it.name)
+                    && !injectClasses.contains(it.name)
+        }.map {
             val stream = unfinishedJar.getInputStream(it)
             val bytes = stream.readBytes()
             stream.close()
             it.name to bytes
-        }.toMutableList()
+        }.toMap().toMutableMap()
 
-        classes.addAll(overwriteClasses.map {
+        classes.putAll(overwriteClasses.mapNotNull {
             val stream = this.javaClass.getResourceAsStream(it)
-            val bytes = stream.readBytes()
-            stream.close()
-            it to bytes
-        })
+            if (stream == null) {
+                println("$it FAILED")
+                null
+            } else {
+                val bytes = stream.readBytes()
+                stream.close()
+                it to bytes
+            }
+        }.toMap())
 
         // TODO: This won't be needed when the top is removed
         if (finishedFile.exists()) finishedFile.delete()
@@ -75,9 +89,10 @@ open class BetaMinecraftTask : DefaultTask() {
         val finishedJarStream = ZipOutputStream(FileOutputStream(finishedFile))
         val output = BufferedOutputStream(finishedJarStream)
 
-        classes.forEach {
-            finishedJarStream.putNextEntry(ZipEntry(it.first))
-            output.write(it.second)
+        val usedClasses = mutableSetOf<String>()
+        classes.forEach { (name, bytes) ->
+            finishedJarStream.putNextEntry(ZipEntry(name))
+            output.write(bytes)
             output.flush()
             finishedJarStream.closeEntry()
         }

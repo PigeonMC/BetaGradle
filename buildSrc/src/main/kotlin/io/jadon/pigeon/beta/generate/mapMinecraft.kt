@@ -77,11 +77,28 @@ open class MapMinecraftTask : DefaultTask() {
         println("Merged Jar: ${extension.mergedJar}")
         println("Mapped Jar: ${extension.mappedJar}")
 
-        val serverToClientObfFile = File(extension.serverToClientObf)
         val clientFile = File(extension.clientJar)
         val serverFile = File(extension.serverJar)
         val mergedFile = File(extension.mergedJar)
         val mappedFile = File(extension.mappedJar)
+
+//        fun tempFileFromResource(s: String): File {
+//            val stream = this.javaClass.getResourceAsStream(s)
+//            val content = stream.readBytes()
+//            stream.close()
+//
+//            val file = if (s.contains(".")) {
+//                val parts = s.split(".")
+//                File.createTempFile(parts[0], parts[1])
+//            } else File.createTempFile(s, ".txt")
+//
+//            file.writeBytes(content)
+//
+//            return file
+//        }
+
+        val serverToClientObfFile = File(extension.serverToClientObf)
+        val tsrgFile = File(extension.tsrgFile)
 
         if (!clientFile.exists()) {
             println("Downloading Vanilla Client Jar")
@@ -119,7 +136,6 @@ open class MapMinecraftTask : DefaultTask() {
                 serverOnlyClasses
         )
 
-        val tsrgFile = File(extension.tsrgFile)
         if (!tsrgFile.exists()) throw IllegalArgumentException("Can't find mappings file: ${tsrgFile.path}")
 
         val tempSrgFile = File.createTempFile("tempMinecraftMappings", ".srg")

@@ -2,6 +2,7 @@
 # "overwrite" means the class is completely replaced by a class in src
 # "inject" means the class needs to be replaced by the Mixin version of the class
 
+overwrite net/minecraft/network/NetHandler
 overwrite net/minecraft/network/packet/PlayerPositionPacket
 overwrite net/minecraft/network/packet/MapDataPacket
 overwrite net/minecraft/network/packet/UseEntityPacket
@@ -18,7 +19,7 @@ overwrite net/minecraft/network/packet/UpdateTimePacket
 overwrite net/minecraft/network/packet/BlockItemSwitchPacket
 overwrite net/minecraft/network/packet/SetSlotPacket
 overwrite net/minecraft/network/packet/FlyingPacket
-overwrite net/minecraft/network/packet/OpenWindowPacker
+overwrite net/minecraft/network/packet/OpenWindowPacket
 overwrite net/minecraft/network/packet/EntityStatusPacket
 overwrite net/minecraft/network/packet/EntitySpawnPacket
 overwrite net/minecraft/network/packet/BlockDigPacket
@@ -54,7 +55,7 @@ overwrite net/minecraft/network/packet/BlockChangePacket
 overwrite net/minecraft/network/packet/EntityPacket
 overwrite net/minecraft/network/packet/UpdateSignPacket
 overwrite net/minecraft/network/packet/EntityMetadataPacket
-overwrite net/minecraft/network/packet/PlayerRotationPacker
+overwrite net/minecraft/network/packet/PlayerRotationPacket
 overwrite net/minecraft/network/packet/PaintingEntityPacket
 overwrite net/minecraft/network/packet/PlayNoteBlockPacket
 overwrite net/minecraft/network/packet/MultiBlockChangePacket

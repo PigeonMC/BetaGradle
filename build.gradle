@@ -27,7 +27,7 @@ dependencies {
     compile gradleApi()
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     // only needed for intellij to not error
-    compileOnly fileTree(dir: 'build/minecraft/', include: 'minecraft_merged_mapped.jar')
+    compileOnly fileTree(dir: 'src/main/resources/', include: 'unfinished.jar')
 }
 
 compileKotlin {
@@ -40,6 +40,7 @@ compileTestKotlin {
 minecraftData {
     serverToClientObf = "src/main/resources/mappings/serverToClientObf.tsrg"
     tsrgFile = "src/main/resources/mappings/merged.tsrg"
+    mappedJar = "src/main/resources/unfinished.jar"
 }
 
 compileJava.dependsOn mapMinecraft
