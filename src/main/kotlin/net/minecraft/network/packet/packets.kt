@@ -310,6 +310,8 @@ open class EntityMetadataPacket(
 
     override fun getPacketSize(): Int = 5
 
+    fun b(): List<*> = metadata
+
 }
 
 open class EntityPacket(
@@ -915,6 +917,7 @@ open class MultiBlockChangePacket : Packet {
     override fun getPacketSize(): Int = 10 + this.size * 4
 
 }
+
 open class NamedEntitySpawnPacket() : Packet() {
     @JvmField
     var entityId: Int = 0
@@ -973,6 +976,7 @@ open class NamedEntitySpawnPacket() : Packet() {
 
     override fun getPacketSize(): Int = 28
 }
+
 open class OpenWindowPacket() : Packet() {
     @JvmField
     var windowId: Int = 0
@@ -1010,6 +1014,7 @@ open class OpenWindowPacket() : Packet() {
 
     override fun getPacketSize(): Int = 3 + this.windowTitle.length
 }
+
 open class PaintingEntityPacket() : Packet() {
     @JvmField
     var entityId: Int = 0
@@ -1058,7 +1063,7 @@ open class PaintingEntityPacket() : Packet() {
     override fun getPacketSize(): Int = 24
 }
 
-open class PlaceBlockPacket : Packet() {
+open class PlaceBlockPacket() : Packet() {
     @JvmField
     var x: Int = 0
     @JvmField
@@ -1069,6 +1074,14 @@ open class PlaceBlockPacket : Packet() {
     var direction: Int = 0
     @JvmField
     var itemStack: ItemStack? = null
+
+    constructor(x: Int, y: Int, z: Int, direction: Int, itemStack: ItemStack?) : this() {
+        this.x = x
+        this.y = y
+        this.z = z
+        this.direction = direction
+        this.itemStack = itemStack
+    }
 
     override fun readPacketData(var1: DataInputStream) {
         this.x = var1.readInt()
@@ -1108,6 +1121,7 @@ open class PlaceBlockPacket : Packet() {
     override fun getPacketSize(): Int = 15
 
 }
+
 open class PlayerInventoryPacket() : Packet() {
     @JvmField
     var entityId: Int = 0
@@ -1151,6 +1165,7 @@ open class PlayerInventoryPacket() : Packet() {
 
     override fun getPacketSize(): Int = 8
 }
+
 open class PlayerPositionPacket : FlyingPacket {
     constructor() {
         this.moving = true
@@ -1184,6 +1199,7 @@ open class PlayerPositionPacket : FlyingPacket {
     override fun getPacketSize(): Int = 33
 
 }
+
 open class PlayerPositionRotationPacket : FlyingPacket {
     constructor() {
         this.rotating = true
@@ -1224,6 +1240,7 @@ open class PlayerPositionRotationPacket : FlyingPacket {
 
     override fun getPacketSize(): Int = 41
 }
+
 open class PlayerRotationPacket : FlyingPacket {
     constructor() {
         this.rotating = true
@@ -1250,6 +1267,7 @@ open class PlayerRotationPacket : FlyingPacket {
 
     override fun getPacketSize(): Int = 9
 }
+
 open class PlayNoteBlockPacket() : Packet() {
     @JvmField
     var x: Int = 0
@@ -1355,6 +1373,7 @@ open class PositionPacket() : Packet() {
         return this.d
     }
 }
+
 open class RelativeEntityPositionPacket : EntityPacket {
     constructor() {}
 
@@ -1380,6 +1399,7 @@ open class RelativeEntityPositionPacket : EntityPacket {
 
     override fun getPacketSize(): Int = 7
 }
+
 open class RelativeEntityPositionRotationPacket : EntityPacket {
     constructor() {
         this.rotating = true
@@ -1543,6 +1563,7 @@ open class UpdateProgressBarPacket : Packet {
 
     override fun getPacketSize(): Int = 5
 }
+
 open class UpdateSignPacket : Packet {
     @JvmField
     var x: Int = 0
@@ -1594,6 +1615,7 @@ open class UpdateSignPacket : Packet {
 
     override fun getPacketSize(): Int = this.signLines.map { it.length }.sum()
 }
+
 open class UpdateTimePacket : Packet {
     @JvmField
     var time: Long = 0
@@ -1645,6 +1667,7 @@ open class UseEntityPacket : Packet() {
 
     override fun getPacketSize(): Int = 9
 }
+
 open class VehicleSpawnPacket : Packet {
     @JvmField
     var entityId: Int = 0
@@ -1749,7 +1772,7 @@ open class VehicleSpawnPacket : Packet {
 
 // TODO: WeatherPacket
 
-open class WindowClickPacket : Packet() {
+open class WindowClickPacket : Packet {
     @JvmField
     var windowId: Int = 0
     @JvmField
@@ -1762,6 +1785,15 @@ open class WindowClickPacket : Packet() {
     var itemStack: ItemStack? = null
     @JvmField
     var totalPacketsCount: Boolean = false
+
+    constructor(windowId: Int, inventorySlot: Int, mouseClick: Int, totalPacketsCout: Boolean, itemStack: ItemStack?, action: Short) : super() {
+        this.windowId = windowId
+        this.inventorySlot = inventorySlot
+        this.mouseClick = mouseClick
+        this.action = action
+        this.itemStack = itemStack
+        this.totalPacketsCount = totalPacketsCount
+    }
 
     override fun processPacket(var1: NetHandler) {
         var1.a(this)
@@ -1802,6 +1834,7 @@ open class WindowClickPacket : Packet() {
 
     override fun getPacketSize(): Int = 11
 }
+
 open class WindowItemPacket : Packet {
     @JvmField
     var windowId: Int = 0
