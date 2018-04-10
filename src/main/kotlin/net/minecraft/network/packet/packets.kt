@@ -13,12 +13,6 @@ import net.minecraft.world.World
 import net.minecraft.world.chunk.ChunkPosition
 import java.io.DataInputStream
 import java.io.DataOutputStream
-import java.util.zip.Deflater
-import java.util.zip.Inflater
-
-fun main(args: Array<String>) {
-    
-}
 
 /*
  * These classes are used instead of the Vanilla ones because neither the Server nor the Client
@@ -1424,6 +1418,7 @@ open class RelativeEntityPositionRotationPacket : EntityPacket {
 }
 
 // TODO: RespawnPacket
+
 open class SetSlotPacket : Packet {
     @JvmField
     var windowId: Int = 0

@@ -7,205 +7,205 @@ abstract class NetHandler() {
 
     abstract fun isServerHandler(): Boolean
 
-    fun handleMapChunk(var1: MapChunkPacket) {}
+    open fun handleMapChunk(var1: MapChunkPacket) {}
 
-    fun registerPacket(var1: Packet) {}
+    open fun registerPacket(var1: Packet) {}
 
-    fun handleErrorMessage(var1: String, var2: Array<Any>) {}
+    open fun handleErrorMessage(var1: String, var2: Array<Any>) {}
 
-    fun handleKickDisconnect(var1: KickDisconnectPacket) {
+    open fun handleKickDisconnect(var1: KickDisconnectPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleLogin(var1: LoginPacket) {
+    open fun handleLogin(var1: LoginPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleFlying(var1: FlyingPacket) {
+    open fun handleFlying(var1: FlyingPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleMultiBlockChange(var1: MultiBlockChangePacket) {
+    open fun handleMultiBlockChange(var1: MultiBlockChangePacket) {
         this.registerPacket(var1)
     }
 
-    fun handleBlockDig(var1: BlockDigPacket) {
+    open fun handleBlockDig(var1: BlockDigPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleBlockChange(var1: BlockChangePacket) {
+    open fun handleBlockChange(var1: BlockChangePacket) {
         this.registerPacket(var1)
     }
 
-    fun handlePreChunk(var1: PreChunkPacket) {
+    open fun handlePreChunk(var1: PreChunkPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleNamedEntitySpawn(var1: NamedEntitySpawnPacket) {
+    open fun handleNamedEntitySpawn(var1: NamedEntitySpawnPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleEntity(var1: EntityPacket) {
+    open fun handleEntity(var1: EntityPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleEntityTeleport(var1: EntityTeleportPacket) {
+    open fun handleEntityTeleport(var1: EntityTeleportPacket) {
         this.registerPacket(var1)
     }
 
-    fun handlePlace(var1: PlaceBlockPacket) {
+    open fun handlePlace(var1: PlaceBlockPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleBlockItemSwitch(var1: BlockItemSwitchPacket) {
+    open fun handleBlockItemSwitch(var1: BlockItemSwitchPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleDestroyEntity(var1: DestroyEntityPacket) {
+    open fun handleDestroyEntity(var1: DestroyEntityPacket) {
         this.registerPacket(var1)
     }
 
-    fun handlePickupSpawn(var1: ItemSpawnPacket) {
+    open fun handlePickupSpawn(var1: ItemSpawnPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleCollect(var1: CollectPacket) {
+    open fun handleCollect(var1: CollectPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleChat(var1: ChatPacket) {
+    open fun handleChat(var1: ChatPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleVehicleSpawn(var1: VehicleSpawnPacket) {
+    open fun handleVehicleSpawn(var1: VehicleSpawnPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleArmAnimation(var1: AnimationPacket) {
+    open fun handleArmAnimation(var1: AnimationPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: EntityActionPacket) {
+    open fun a(var1: EntityActionPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleHandshake(var1: HandshakePacket) {
+    open fun handleHandshake(var1: HandshakePacket) {
         this.registerPacket(var1)
     }
 
-    fun handleMobSpawn(var1: EntitySpawnPacket) {
+    open fun handleMobSpawn(var1: EntitySpawnPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleUpdateTime(var1: UpdateTimePacket) {
+    open fun handleUpdateTime(var1: UpdateTimePacket) {
         this.registerPacket(var1)
     }
 
-    fun handleSpawnPosition(var1: SpawnPositionPacket) {
+    open fun handleSpawnPosition(var1: SpawnPositionPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: EntityVelocityPacket) {
+    open fun a(var1: EntityVelocityPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: EntityMetadataPacket) {
+    open fun a(var1: EntityMetadataPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: AttachEntityPacket) {
+    open fun a(var1: AttachEntityPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleUseEntity(var1: UseEntityPacket) {
+    open fun handleUseEntity(var1: UseEntityPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: EntityStatusPacket) {
+    open fun a(var1: EntityStatusPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleHealth(var1: UpdateHealthPacket) {
+    open fun handleHealth(var1: UpdateHealthPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: RespawnPacket) {
+    open fun a(var1: RespawnPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: ExplosionPacket) {
+    open fun a(var1: ExplosionPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: OpenWindowPacket) {
+    open fun a(var1: OpenWindowPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: CloseWindowPacket) {
+    open fun a(var1: CloseWindowPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: WindowClickPacket) {
+    open fun a(var1: WindowClickPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: SetSlotPacket) {
+    open fun a(var1: SetSlotPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: WindowItemPacket) {
+    open fun a(var1: WindowItemPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleSignUpdate(var1: UpdateSignPacket) {
+    open fun handleSignUpdate(var1: UpdateSignPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: UpdateProgressBarPacket) {
+    open fun a(var1: UpdateProgressBarPacket) {
         this.registerPacket(var1)
     }
 
-    fun handlePlayerInventory(var1: PlayerInventoryPacket) {
+    open fun handlePlayerInventory(var1: PlayerInventoryPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: TransactionPacket) {
+    open fun a(var1: TransactionPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: PaintingEntityPacket) {
+    open fun a(var1: PaintingEntityPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleNotePlay(var1: PlayNoteBlockPacket) {
+    open fun handleNotePlay(var1: PlayNoteBlockPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: StatisticPacket) {
+    open fun a(var1: StatisticPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: SleepPacket) {
+    open fun a(var1: SleepPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: PositionPacket) {
+    open fun a(var1: PositionPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: BedPacket) {
+    open fun a(var1: BedPacket) {
         this.registerPacket(var1)
     }
 
-    fun handleWeather(var1: WeatherPacket) {
+    open fun handleWeather(var1: WeatherPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: MapDataPacket) {
+    open fun a(var1: MapDataPacket) {
         this.registerPacket(var1)
     }
 
-    fun a(var1: DoorUpdatePacket) {
+    open fun a(var1: DoorUpdatePacket) {
         this.registerPacket(var1)
     }
 

@@ -4,15 +4,15 @@
 
 overwrite net/minecraft/network/NetHandler
 overwrite net/minecraft/network/packet/PlayerPositionPacket
-overwrite net/minecraft/network/packet/MapDataPacket
+# overwrite net/minecraft/network/packet/MapDataPacket
 overwrite net/minecraft/network/packet/UseEntityPacket
-overwrite net/minecraft/network/packet/BedPacket
+# overwrite net/minecraft/network/packet/BedPacket
 overwrite net/minecraft/network/packet/CollectPacket
-overwrite net/minecraft/network/packet/MapChunkPacket
-overwrite net/minecraft/network/packet/UpdateHealthPacket
+# overwrite net/minecraft/network/packet/MapChunkPacket
+# overwrite net/minecraft/network/packet/UpdateHealthPacket
 overwrite net/minecraft/network/packet/PlayerPositionRotationPacket
-overwrite net/minecraft/network/packet/WeatherPacket
-overwrite net/minecraft/network/packet/DoorUpdatePacket
+# overwrite net/minecraft/network/packet/WeatherPacket
+# overwrite net/minecraft/network/packet/DoorUpdatePacket
 overwrite net/minecraft/network/packet/EntityVelocityPacket
 overwrite net/minecraft/network/packet/PlaceBlockPacket
 overwrite net/minecraft/network/packet/UpdateTimePacket
@@ -23,9 +23,9 @@ overwrite net/minecraft/network/packet/OpenWindowPacket
 overwrite net/minecraft/network/packet/EntityStatusPacket
 overwrite net/minecraft/network/packet/EntitySpawnPacket
 overwrite net/minecraft/network/packet/BlockDigPacket
-overwrite net/minecraft/network/packet/SleepPacket
+# overwrite net/minecraft/network/packet/SleepPacket
 overwrite net/minecraft/network/packet/WindowItemPacket
-# overwrite net/minecraft/network/packet/Packet
+## overwrite net/minecraft/network/packet/Packet
 overwrite net/minecraft/network/packet/KeepAlivePacket
 overwrite net/minecraft/network/packet/NamedEntitySpawnPacket
 overwrite net/minecraft/network/packet/CloseWindowPacket
@@ -35,9 +35,9 @@ overwrite net/minecraft/network/packet/ItemSpawnPacket
 overwrite net/minecraft/network/packet/AnimationPacket
 overwrite net/minecraft/network/packet/AttachEntityPacket
 overwrite net/minecraft/network/packet/LoginPacket
-overwrite net/minecraft/network/packet/StatisticPacket
-overwrite net/minecraft/network/packet/TransactionPacket
-overwrite net/minecraft/network/packet/RespawnPacket
+# overwrite net/minecraft/network/packet/StatisticPacket
+# overwrite net/minecraft/network/packet/TransactionPacket
+# overwrite net/minecraft/network/packet/RespawnPacket
 overwrite net/minecraft/network/packet/ChatPacket
 overwrite net/minecraft/network/packet/RelativeEntityPositionRotationPacket
 overwrite net/minecraft/network/packet/PositionPacket
@@ -59,4 +59,4 @@ overwrite net/minecraft/network/packet/PlayerRotationPacket
 overwrite net/minecraft/network/packet/PaintingEntityPacket
 overwrite net/minecraft/network/packet/PlayNoteBlockPacket
 overwrite net/minecraft/network/packet/MultiBlockChangePacket
-overwrite net/minecraft/network/packet/KickDisconnectPacket
+# overwrite net/minecraft/network/packet/KickDisconnectPacket
