@@ -21,11 +21,28 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven {
+        name = "mikroskeem"
+        url "https://repo.wut.ee/repository/mikroskeem-repo"
+    }
+
+    maven {
+        name = 'sponge'
+        url = 'http://repo.spongepowered.org/maven'
+    }
 }
 
 dependencies {
     compile gradleApi()
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    compile("eu.mikroskeem:legacylauncher:1.18") {
+        exclude group: "org.ow2.asm", module: "asm-all"
+    }
+    compile ("org.spongepowered:mixin:0.7.7-SNAPSHOT") {
+        exclude group: "net.minecraft", module: "launchwrapper"
+    }
+
     // only needed for intellij to not error
     compileOnly fileTree(dir: 'src/main/resources/', include: 'unfinished.jar')
 }

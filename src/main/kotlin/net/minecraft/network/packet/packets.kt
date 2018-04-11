@@ -269,6 +269,8 @@ open class EntityActionPacket(
 
     constructor() : this(0, 0)
 
+    constructor(entity: Entity, state: Int) : this(entity.entityId, state)
+
     override fun readPacketData(input: DataInputStream) {
         this.entityId = input.readInt()
         this.state = input.readByte().toInt()
@@ -1572,7 +1574,7 @@ open class UpdateSignPacket : Packet {
     @JvmField
     var z: Int = 0
     @JvmField
-    var signLines: Array<String> = arrayOf()
+    var signLines: Array<String> = arrayOf("", "", "", "")
 
     constructor() {
         this.isChunkDataPacket = true
@@ -1590,7 +1592,7 @@ open class UpdateSignPacket : Packet {
         this.x = input.readInt()
         this.y = input.readShort().toInt()
         this.z = input.readInt()
-        this.signLines = arrayOf()
+        this.signLines = arrayOf("", "", "", "")
 
         for (var2 in 0..3) {
             this.signLines[var2] = Packet.readString(input, 15)

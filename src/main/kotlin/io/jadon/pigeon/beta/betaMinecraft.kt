@@ -59,6 +59,8 @@ open class BetaMinecraftTask : DefaultTask() {
             }
         }
 
+        ClassCacheTransformer.CLASSES_TO_CACHE = injectClasses
+
         val unfinishedJar = ZipFile(unfinishedFile)
         val classes = unfinishedJar.entries().toList().filter {
             !overwriteClasses.contains(it.name)

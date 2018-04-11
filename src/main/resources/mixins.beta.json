@@ -1,0 +1,13 @@
+{
+  "minVersion": "0.7.7",
+  "package": "io.jadon.pigeon.beta.mixin",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinMinecraftServer",
+    "MixinServerWorld",
+    "MixinAbstractSaveHandler",
+    "MixinServerSaveHandler",
+    "MixinMinecraftClient"
+  ]
+}

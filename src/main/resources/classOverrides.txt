@@ -2,6 +2,7 @@
 # "overwrite" means the class is completely replaced by a class in src
 # "inject" means the class needs to be replaced by the Mixin version of the class
 
+# Packets
 overwrite net/minecraft/network/NetHandler
 overwrite net/minecraft/network/packet/PlayerPositionPacket
 # overwrite net/minecraft/network/packet/MapDataPacket
@@ -60,3 +61,19 @@ overwrite net/minecraft/network/packet/PaintingEntityPacket
 overwrite net/minecraft/network/packet/PlayNoteBlockPacket
 overwrite net/minecraft/network/packet/MultiBlockChangePacket
 # overwrite net/minecraft/network/packet/KickDisconnectPacket
+
+# Classes that need constructors
+overwrite net/minecraft/util/FrozenThread
+
+# Classes that aren't really overwritten but need to be added
+# (mostly interfaces)
+overwrite net/minecraft/Minecraft
+
+# Classes that need Mixin injections
+# (put the name of the class that needs to be injected, not the name
+#  of the Mixin class)
+inject net/minecraft/world/AbstractSaveHandler
+inject net/minecraft/client/MinecraftClient
+inject net/minecraft/server/MinecraftServer
+inject net/minecraft/server/world/ServerWorld
+inject net/minecraft/server/world/ServerSaveHandler
